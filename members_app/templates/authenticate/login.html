@@ -1,0 +1,44 @@
+{% extends 'dentist/base.html' %}
+
+{% load static %}  
+
+
+{%block content%}
+<center>
+<h1>Login</h1> 
+
+<br/>
+<div class="col-lg-6 border border-primary mx-auto">
+    <br/>
+    <form action="" method=POST>
+        {% csrf_token %}
+    
+            
+                <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Username</label>
+                <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+                </div>
+
+                <br/>
+
+                <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password">
+                </div>
+                
+                {% if messages %}
+
+                    {% for message in messages %}
+                        {{message}}
+                    {% endfor %}
+
+                {% endif %}
+                <br/>
+        <input type="submit" value="Submit" class="btn btn-secondary">
+    </form>
+    <br/>
+</div>
+<br/><br/>
+</center>  
+    
+    {%endblock%}

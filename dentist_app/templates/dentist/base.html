@@ -1,0 +1,85 @@
+{% load static %}  
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from preview.colorlib.com/theme/dento/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 08 Feb 2023 15:35:09 GMT -->
+<head>
+<meta charset="UTF-8">
+<meta name="description" content="Dento - Dentist &amp; Medical HTML Template">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>Dentist</title>
+
+<link rel="icon" href="{% static 'dentist/img/core-img/favicon.ico' %}">
+
+<link rel="stylesheet" href="{% static 'dentist/css/style.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+<!------------------------------------------------------------NAVBAR-------------------------------------------------------------->
+
+    {% include 'dentist/navbar.html'%}   
+<!------------------------------------------------------------NAV END-------------------------------------------------------------->  
+  
+
+
+
+
+
+
+<!------------------------------------------------------------Other Pages-------------------------------------------------------------->
+{%block content%}
+
+
+
+
+
+{%endblock%}
+<!------------------------------------------------------------End of Other Pages-------------------------------------------------------------->
+
+
+
+<!------------------------------------------------------------Footer-------------------------------------------------------------->
+
+{% include 'dentist/footer.html'%}   
+<!------------------------------------------------------------Footer END-------------------------------------------------------------->  
+  
+
+
+
+     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="{% static 'dentist/js/jquery.min.js' %}"></script>
+    
+    <script src="{% static 'dentist/js/popper.min.js' %}"></script>
+    
+    <script src="{% static 'dentist/js/bootstrap.min.js' %}"></script>
+    
+    <script src="{% static 'dentist/js/dento.bundle.js' %}"></script>
+    
+    <script src="{% static 'dentist/js/default-assets/active.js' %}"></script>
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-23581568-13');
+    </script>
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vaafb692b2aea4879b33c060e79fe94621666317369993" integrity="sha512-0ahDYl866UMhKuYcW078ScMalXqtFJggm7TmlUtp0UlD4eQk0Ixfnm5ykXKvGJNFjLMoortdseTfsRT8oCfgGA==" data-cf-beacon='{"rayId":"79656ef4ad7b06e3","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.11.3","si":100}' crossorigin="anonymous"></script>
+    
+    </body>
