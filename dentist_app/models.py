@@ -24,15 +24,22 @@ class Patient (models.Model):
     def __str__(self):
         return self.first_name
 
+SPECIALTY = [ 
+    ('Periodontists','Periodontists' ),
+    ('Prosthodontists','Prosthodontists' ),
+    ('Pediatric','Pediatric' ),
+    ('General Checkup','General Checkup' ),
+    ('Toothache','Toothache' ),
+    ]
 
 class Doctor (models.Model):
-
+    
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    phone = models.IntegerField()
+    phone = models.CharField(max_length=100)
     email = models.EmailField(max_length=130)
-    specialty = models.CharField(max_length=100)
+    specialty = models.CharField(choices=SPECIALTY,max_length=200)
     address = models.TextField(max_length=200)
 
     def __str__(self):

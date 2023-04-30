@@ -1,0 +1,23 @@
+{% extends 'dentist/base.html' %}
+{% load static %}
+
+
+{%block content%}
+
+<br/><br/>
+<center>
+<div class="col-lg-6 border border-primary mx-auto">
+    <br/>
+<form method="POST" accept-charset="utf-8">
+    {% csrf_token %}
+    {{form.as_p}}
+    <input type="Submit" name="submit" value="Signup" class="btn btn-primary">
+</form>
+<br/>
+</div>
+</center>
+<br/><br/>
+
+
+
+{%endblock%}
