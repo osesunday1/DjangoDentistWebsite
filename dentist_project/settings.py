@@ -117,8 +117,8 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 #For Email Settings 1ST WAY
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT= 587
-EMAIL_HOST_USER = 'ose.sunday@gmail.com'
-EMAIL_HOST_PASSWORD='nvlzwxoucqbvaukl'
+EMAIL_HOST_USER = 'ose@gmail.com'
+EMAIL_HOST_PASSWORD='nlzwxoucqbvaukl'
 EMAIL_USE_TLS= True
 #EMAIL_USE_SSL= False
 
@@ -128,7 +128,7 @@ EMAIL_USE_TLS= True
 
 DEBUG= True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER= 'ose.sunday@gmail.com'
+EMAIL_HOST_USER= 'ose@gmail.com'
 EMAIL_HOST_PASSWORD='nvlzwxoucqbvaukl'
 EMAIL_PORT= 587
 EMAIL_USE_TLS= True
