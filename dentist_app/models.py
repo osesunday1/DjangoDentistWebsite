@@ -51,8 +51,9 @@ class Scheduler (models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
-    phone = models.IntegerField()
+    phone = models.CharField(max_length=100)
     email = models.TextField(max_length=130)
+    address = models.CharField(max_length=200)
 
     def __str__(self):
         return self.first_name
@@ -60,17 +61,24 @@ class Scheduler (models.Model):
 
 class Appointment(models.Model):
     ISSUES = [ 
-    ('Headache','Headache' ),
-    ('Body Itch','Body Itch' ),
-    ('Stomach Pain','Stomach Pain' ),
-    ('General Checkup','General Checkup' ),
+    ('Whitening','Whitening' ),
     ('Toothache','Toothache' ),
     ]
-
-    patient_name = models.ForeignKey(Patient, null=True, on_delete= models.SET_NULL)
+    TIME = [ 
+    ('08 AM to 09 AM','08 AM to 09 AM' ),
+    ('09 AM to 10 AM','09 AM to 10 AM' ),
+    ('10 AM to 11 AM','10 AM to 11 AM' ),
+    ('11 AM to 12 PM','11 AM to 12 PM' ),
+    ('12 PM to 01 PM','12 PM to 01 PM' ),
+    ('01 PM to 02 PM','01 PM to 02 PM' ),
+    ('03 PM to 03 PM','02 PM to 03 PM' ),
+    ('04 PM to 05 PM','04 PM to 05 PM' ),
+    ]
+    patient_name = models.ForeignKey(User, on_delete=models.CASCADE, null= True, blank= True )
     date = models.DateTimeField('Appointment Date')
-    doctor_name = models.ForeignKey(Doctor, null=True, on_delete= models.SET_NULL)
+    doctor_name = models.ForeignKey(Doctor, null=True, blank= True, on_delete= models.SET_NULL)
     issue= models.CharField(choices=ISSUES,max_length=120, null= True, blank= True)
+    time= models.CharField(choices=TIME,max_length=120, null= True, blank= True)
 
 
     def __str__(self):

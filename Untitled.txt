@@ -1,0 +1,6 @@
+
+<script>
+   var name = "{{ user.id }}";
+	document.getElementById("elder").placeholder
+		= name;
+</script>

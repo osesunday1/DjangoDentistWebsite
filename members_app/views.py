@@ -55,3 +55,16 @@ class DoctorSignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('login')
+
+
+class SchedulerSignUpView(CreateView):
+    model = User
+    form_class = SchedulerSignUpForm
+    template_name = 'dentist/signupScheduler.html'
+    def get_context_data(self, **kwargs):
+        kwargs['user_type'] = 'scheduler'
+        return super().get_context_data(**kwargs)
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('login')

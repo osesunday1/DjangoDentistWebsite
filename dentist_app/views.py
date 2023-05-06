@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
-
-
+from .models import *
+from django.views.generic import *
+from .forms import ApointmentForm
 
 
 
@@ -24,8 +25,12 @@ def services (request):
 def pricing (request):
     return render(request, 'dentist/pricing.html' )
 
-def appointment (request):
-    return render(request, 'dentist/appointment.html' )
+class appointment (CreateView):
+    model = Appointment
+    form_class = ApointmentForm
+    template_name = 'dentist/appointment.html'
+    #fields = '__all__'
+    #fields = ('title', 'body')
 
 
 def contact(request):

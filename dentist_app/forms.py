@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db import transaction
 from .models import *
+from django.forms import ModelForm
 
 
 
@@ -57,14 +58,9 @@ class DoctorSignUpForm(UserCreationForm):
     last_name=forms.CharField(required=True, widget = forms.TextInput(attrs={'class':'form-control'}))
     phone = forms.CharField(required=True, widget = forms.TextInput(attrs={'class':'form-control'}))
     email=forms.EmailField(required=True, widget = forms.EmailInput(attrs={'class':'form-control'}))
-    #specialty = forms.ModelChoiceField(queryset=Doctor.objects.all(), to_field_name='specialty_id', widget=forms.Select(attrs={'class': 'form-control'}))
     specialty = forms.CharField(required=False, widget=forms.Select(choices=SPECIALTY, attrs={'class':'form-control'}))
     address = forms.CharField(required=False, widget = forms.TextInput(attrs={'class':'form-control'}))
     
-
-
-
-
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -91,3 +87,66 @@ class DoctorSignUpForm(UserCreationForm):
         self.fields['username'].widget.attrs['class'] = 'form-control'
         self.fields['password1'].widget.attrs['class'] = 'form-control'
         self.fields['password2'].widget.attrs['class'] = 'form-control'
+
+
+
+
+
+class SchedulerSignUpForm(UserCreationForm):  
+    first_name=forms.CharField(required=True, widget = forms.TextInput(attrs={'class':'form-control'}))
+    last_name=forms.CharField(required=True, widget = forms.TextInput(attrs={'class':'form-control'}))
+    phone = forms.CharField(required=True, widget = forms.TextInput(attrs={'class':'form-control'}))
+    email=forms.EmailField(required=True, widget = forms.EmailInput(attrs={'class':'form-control'}))
+    address = forms.CharField(required=False, widget = forms.TextInput(attrs={'class':'form-control'}))
+    
+    class Meta(UserCreationForm.Meta):
+        model = User
+        fields = ('username', 'password1', 'password2','first_name', 'last_name', 'phone', 'email', 'address')
+    @transaction.atomic
+    def save(self):
+        
+        user = super().save(commit=False)
+        
+        user.is_scheduler = True
+        user.save()
+        scheduler = Scheduler.objects.create(user=user)
+        scheduler.first_name=self.cleaned_data.get('first_name')
+        scheduler.last_name=self.cleaned_data.get('last_name')
+        scheduler.phone=self.cleaned_data.get('phone')
+        scheduler.email=self.cleaned_data.get('email')
+        scheduler.address=self.cleaned_data.get('address')
+        scheduler.save()
+        return user
+    
+    def __init__(self, *args, **kwargs):
+        super(SchedulerSignUpForm, self). __init__(*args, **kwargs)
+        self.fields['username'].widget.attrs['class'] = 'form-control'
+        self.fields['password1'].widget.attrs['class'] = 'form-control'
+        self.fields['password2'].widget.attrs['class'] = 'form-control'
+
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
+
+class ApointmentForm(ModelForm):
+    class Meta:
+        model = Appointment
+        fields= ('patient_name', 'date','issue', 'time') 
+        widgets= {
+            'patient_name': forms.Select(attrs={'class':'form-control', 'value': '', 'id':'elder'}),
+            #'patient_name': forms.Select(attrs={'class':'form-control', 'placeholder': 'what is your name'}),
+            'date': DateInput(attrs={'type': 'date', 'class':'form-control', 'placeholder': 'Tell us the date'}),
+            'issue': forms.Select(attrs={'class':'form-control'}),
+            'time': forms.Select(attrs={'class':'form-control'}),
+            #'doctor_name': forms.Select(attrs={'class':'form-control', 'type':'hidden'}),
+        }
+'''
+        labels= {
+            'patient_name': 'name of patient',
+            'date': '',
+            'issue':'',
+            'doctor_name':'',
+
+        }
+
+'''
