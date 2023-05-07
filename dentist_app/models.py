@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
+from django.urls import reverse
 
 
 
@@ -74,23 +75,25 @@ class Appointment(models.Model):
     ('03 PM to 03 PM','02 PM to 03 PM' ),
     ('04 PM to 05 PM','04 PM to 05 PM' ),
     ]
-    patient_name = models.ForeignKey(User, on_delete=models.CASCADE, null= True, blank= True )
-    date = models.DateTimeField('Appointment Date')
+    patient_name = models.ForeignKey(Patient, on_delete=models.CASCADE, null= True, blank= True )
+    date = models.DateField('Appointment Date')
     doctor_name = models.ForeignKey(Doctor, null=True, blank= True, on_delete= models.SET_NULL)
     issue= models.CharField(choices=ISSUES,max_length=120, null= True, blank= True)
     time= models.CharField(choices=TIME,max_length=120, null= True, blank= True)
 
-
     def __str__(self):
         return self.patient_name
-    
+    '''
+    def get_absolute_url(self):
+        return reverse('services')
+    '''
 
 class Sessions(models.Model):
     doctor_name = models.ForeignKey(Doctor, null=True, on_delete= models.SET_NULL)
     patient_name = models.ForeignKey(Patient, null=True, on_delete= models.SET_NULL)
     doctor_comment= models.TextField(max_length=300)
     doctor_recommendation= models.TextField(max_length=300)
-    sales_date= models.DateTimeField(auto_now_add=True, null= True)
+    date= models.DateTimeField(auto_now_add=False, null= True)
 
     def __str__(self):
         return self.doctor_name
