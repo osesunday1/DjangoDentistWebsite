@@ -1,0 +1,59 @@
+{% extends 'dentist/base.html' %}
+{% load static %}
+{% block title %}List of Patients{%endblock%}
+
+{%block content%}
+
+
+<section class="dento-pricing-table-ar ea mt-50 section-padding-0-100">
+    <div class="container">
+    <div class="row">
+    <div class="col-12">
+    <div class="dento-price-table table-responsive">
+    <table class="table table-borderless mb-0">
+    <thead>
+    <tr>
+    <th scope="col">First Name</th>
+    <th scope="col">Last Name</th>
+    <th scope="col">Phone</th>
+    <th scope="col">Email</th>
+    <th scope="col">Address</th>
+    <th scope="col">View</th>
+    </tr>
+    </thead>
+    <tbody>
+
+        {% for doctor in object_list %}
+    <tr>
+    <ul>
+        
+        <li>
+    <th scope="row">{{ doctor.first_name }}</th>
+    <td>{{ doctor.last_name }}</td>
+    <td>{{ doctor.phone }}</td>
+    <td>{{ doctor.email }}</td>
+    <td>{{ doctor.address}}</td>
+    <td><a href="{% url 'doctorview' doctor.pk %}"> VIEW DOCTOR</a></td>
+    </li>
+    
+    </ul>
+    </tr>
+    {% endfor %}
+
+
+    </tbody>
+    </table>
+    </div>
+    </div>
+    <div class="col-12">
+    <div class="more-btn text-center mt-50">
+    <a href="#" class="btn dento-btn">Read More <i class="fa fa-angle-double-right"></i></a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+
+ 
+
+    {%endblock%}

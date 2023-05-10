@@ -58,12 +58,31 @@
     <li><a href="{% url 'home' %}">Home</a></li>
     <li><a href="{% url 'about' %}">About Us</a></li>
     <li><a href="{% url 'services' %}">Services</a></li>
-    <li><a href="{% url 'pricing' %}">Pricing</a></li>
     <li><a href="{% url 'contact' %}">Contact</a></li>
 
-    <li><a href="{% url 'signupPatient' %}">Patient</a></li>
-    <li><a href="{% url 'signupDoctor' %}">Doc</a></li>
-    <li><a href="{% url 'signupScheduler' %}">sch</a></li>
+
+    <li><a href="#">Signup</a>
+      <ul class="dropdown">
+      <li><a href="{% url 'signupPatient' %}">Patient</a></li>
+      <li><a href="{% url 'signupDoctor' %}">Doc</a></li>
+      <li><a href="{% url 'signupScheduler' %}">sch</a></li>
+      </ul>
+    </li>
+
+    <li><a href="#">List View</a>
+      <ul class="dropdown">
+        <li><a href="{% url 'viewappointmentlist' %}">Appointment list</a></li>
+        <li><a href="{% url 'viewpatientlist' %}">Patient list</a></li>
+        <li><a href="{% url 'viewdoctorlist' %}">Doctor list</a></li>
+        <li><a href="{% url 'viewconsultationlist' %}">Consultation list</a></li>
+      </ul>
+    </li>
+
+
+    
+    
+
+    
 
     {% if user.is_authenticated %}
     <li><a href="{% url 'logout' %}">Logout</a></li> 

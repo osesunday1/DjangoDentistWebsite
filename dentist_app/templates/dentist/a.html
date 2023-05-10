@@ -1,0 +1,15 @@
+<center>
+    <h1>Consultation</h1>
+        <br/><br/>
+    <div class="col-lg-6 border border-primary mx-auto">
+    <div class="form-group"> <br/><br/>
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+    
+            <button  class="btn btn-secondary">Submit</button>
+        </form>
+    </div> 
+    </div>
+    <br/><br/>
+    </center>

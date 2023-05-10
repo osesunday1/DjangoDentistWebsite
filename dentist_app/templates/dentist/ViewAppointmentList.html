@@ -1,0 +1,60 @@
+{% extends 'dentist/base.html' %}
+{% load static %}
+{% block title %}List of Appointment{%endblock%}
+
+{%block content%}
+
+
+<section class="dento-pricing-table-ar ea mt-50 section-padding-0-100">
+    <div class="container">
+    <div class="row">
+    <div class="col-12">
+    <div class="dento-price-table table-responsive">
+    <table class="table table-borderless mb-0">
+    <thead>
+    <tr>
+    <th scope="col">Patient Name</th>
+    <th scope="col">Date</th>
+    <th scope="col">Time</th>
+    <th scope="col">Issue</th>
+    <th scope="col">Doctor</th>
+    <th scope="col">Update</th>
+    <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+
+        {% for appointment in object_list %}
+    <tr>
+    <ul>
+        
+        <li>
+    <th scope="row">{{ appointment.patient_name }}</th>
+    <td>{{ appointment.date }}</td>
+    <td>{{ appointment.time }}</td>
+    <td>{{ appointment.issue }}</td>
+    <td>{{ appointment.doctor_name}}</td>
+    <td><a href="{% url 'updateappointment' appointment.pk %}"><strong>UPDATE</strong></a></td>
+    <td><a href="{% url 'deleteappointment' appointment.pk %}"><strong>DELETE</strong></a></td>
+    </li>
+    <a href=""></a>
+    </ul>
+    </tr>
+    {% endfor %}
+
+
+    </tbody>
+    </table>
+    </div>
+    </div>
+    <div class="col-12">
+    <div class="more-btn text-center mt-50">
+    <a href="#" class="btn dento-btn">Read More <i class="fa fa-angle-double-right"></i></a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+
+
+    {%endblock%}

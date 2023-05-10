@@ -88,15 +88,29 @@ class Appointment(models.Model):
         return reverse('services')
     '''
 
-class Sessions(models.Model):
+class Consultation(models.Model):
     doctor_name = models.ForeignKey(Doctor, null=True, on_delete= models.SET_NULL)
     patient_name = models.ForeignKey(Patient, null=True, on_delete= models.SET_NULL)
-    doctor_comment= models.TextField(max_length=300)
-    doctor_recommendation= models.TextField(max_length=300)
-    date= models.DateTimeField(auto_now_add=False, null= True)
+    diagnostics= models.CharField(max_length=300)
+    treatment= models.CharField(max_length=300)
+    date= models.DateField(auto_now_add=True, null= True)
 
     def __str__(self):
-        return self.doctor_name
+        return self.patient_name
 
+
+
+class MedicalRecord (models.Model):
+    patient_name = models.ForeignKey(Patient, null=True, on_delete= models.SET_NULL)
+    bp= models.CharField(max_length=100, null=True)
+    weight= models.CharField(max_length=100, null=True)
+    height = models.CharField(max_length=100, null=True)
+    family= models.CharField(max_length=100, null=True)
+    allergies= models.CharField(max_length=100, null=True)
+    others = models.TextField(max_length=500, null=True)
+    
+
+    def __str__(self):
+        return self.patient_name
 
 

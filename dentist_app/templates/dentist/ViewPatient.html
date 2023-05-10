@@ -1,0 +1,95 @@
+{% extends 'dentist/base.html' %}
+{% load static %}
+
+{%block content%}
+
+
+<section class="dento-service-area  bg-img bg-gradient-overlay jarallax clearfix" style="background-image: url('/static/dentist/img/bg-img/13.jpg');">
+<!--<section id="services" style="background-color:rgb(50, 59, 68)">-->
+    <div class="section-heading white text-center"> <br><br>
+        <h2>{{ patient.first_name }} {{ patient.last_name }}</h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="row mb-5 align-items-center justify-content-center g-0 ">
+
+    <div class="row mb-5 align-items-center justify-content-center g-0 " >
+        <div class="row">
+
+            <div class="container mb-4  col-12 col-md-6 ">
+            <div class="card h-100">
+               <center> <h5 class="card-header">Patient</h5> </center>
+                <div class="card-body">
+                <h6>First Name: {{ patient.first_name }}</h6>
+                <h6>Last Name: {{ patient.last_name }}</h6>
+                <h6>Email: {{ patient.email }}</h6>
+                <h6>Phone: {{ patient.phone }}</h6>
+                <a href="#" class="btn btn-primary">UPDATE</a>
+                </div>
+            </div>
+            </div>
+
+            <div class="container mb-4  col-12 col-md-6 ">
+                <div class="card h-100">
+                    <center><h5 class="card-header">MEDICAL RECORD</h5></center>
+                    <div class="card-body">
+                    <h5 class="card-title">Special title treatment</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+            </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</section>
+
+
+            
+<br><br>
+<a href="{% url 'createconsultation' patient.pk %}" class="btn btn-primary">Consultation</a>
+
+
+<section id="services" style="background-color:bisque">
+
+
+    <br><br>
+    
+    <div class="row">
+        <div class="col-md">
+            <div class="card card-body">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Product</th>
+                        <th>Category</th>
+                        <th>Date Ordered</th>
+                        <th>Status</th>
+                        <th>Update</th>
+                        <th>Remove</th>
+                    </tr>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ consultation.patient_name }}</td>
+                        <td>{{ consultation.diagnostics }}</td>
+                        <td>{{ consultation.treatment }}</td>
+                        <td>{{ consultation.date }}</td>
+                        <td><a href=""> Update</a></td>
+                        <td><a href=""> Delete</a></td>
+                    </tr>
+                    {% endfor %}
+    
+                </table>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+
+
+
+{%endblock%}

@@ -133,20 +133,71 @@ class ApointmentForm(ModelForm):
         model = Appointment
         fields= ('patient_name', 'date','issue', 'time') 
         widgets= {
-            'patient_name': forms.Select(attrs={'class':'form-control', 'value': '', 'id':'elder'}),
+            'patient_name': forms.TextInput(attrs={'class':'form-control', 'value': '', 'id':'elder', 'type':'hidden'}),
             #'patient_name': forms.Select(attrs={'class':'form-control', 'placeholder': 'what is your name'}),
             'date': DateInput(attrs={'type': 'date', 'class':'form-control', 'placeholder': 'Tell us the date'}),
             'issue': forms.Select(attrs={'class':'form-control'}),
             'time': forms.Select(attrs={'class':'form-control'}),
             #'doctor_name': forms.Select(attrs={'class':'form-control', 'type':'hidden'}),
         }
-'''
-        labels= {
-            'patient_name': 'name of patient',
-            'date': '',
-            'issue':'',
-            'doctor_name':'',
 
+class UpdateAppointmentForm(ModelForm):
+    class Meta:
+        model = Appointment
+        fields= ( 'date','issue', 'doctor_name', 'time') 
+        widgets= {
+            'patient_name': forms.TextInput(attrs={'class':'form-control', 'value': '', 'id':'elder', 'type':'hidden'}),
+            #'patient_name': forms.Select(attrs={'class':'form-control', 'placeholder': 'what is your name'}),
+            'date': DateInput(attrs={'type': 'date', 'class':'form-control', 'placeholder': 'Tell us the date'}),
+            'issue': forms.Select(attrs={'class':'form-control'}),
+            'time': forms.Select(attrs={'class':'form-control'}),
+            'doctor_name': forms.Select(attrs={'class':'form-control', 'type':'hidden'}),
         }
 
-'''
+
+
+
+class ConsultationForm(ModelForm):
+    class Meta:
+        model = Consultation
+        fields= ('patient_name', 'diagnostics','treatment', 'doctor_name') 
+
+        
+        widgets= {
+            'patient_name': forms.Select(attrs={'class':'form-control', 'placeholder': 'what is your name'}),
+            'diagnostics': forms.TextInput(attrs={'class':'form-control'}),
+            'treatment': forms.TextInput(attrs={'class':'form-control'}),           
+            #'date': DateInput(attrs={'type': 'date', 'class':'form-control'}),
+            'doctor_name': forms.Select(attrs={'class':'form-control'}),
+        }
+
+class ConsultationForm2(ModelForm):
+    class Meta:
+        model = Consultation
+        fields= ('patient_name', 'diagnostics','treatment', 'doctor_name') 
+
+        
+        widgets= {
+            'patient_name': forms.TextInput(attrs={'class':'form-control'}),
+            'diagnostics': forms.TextInput(attrs={'class':'form-control'}),
+            'treatment': forms.TextInput(attrs={'class':'form-control'}),           
+            #'date': DateInput(attrs={'type': 'date', 'class':'form-control'}),
+            'doctor_name': forms.Select(attrs={'class':'form-control'}),
+            
+        }
+        
+
+
+class MedicalRecordForm (ModelForm):
+    class Meta:
+        model = MedicalRecord
+        fields= ('patient_name', 'bp', 'weight', 'height','family', 'allergies', 'others',) 
+        widgets= {
+            'patient_name': forms.Select(attrs={'class':'form-control'}),
+            'bp': forms.TextInput(attrs={'class':'form-control'}),
+            'weight': forms.TextInput(attrs={'class':'form-control'}),
+            'height': forms.TextInput(attrs={'class':'form-control'}),
+            'family': forms.TextInput(attrs={'class':'form-control'}),
+            'allergies': forms.TextInput(attrs={'class':'form-control'}),
+            'others': forms.TextInput(attrs={'class':'form-control'}),
+        }

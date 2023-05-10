@@ -1,0 +1,56 @@
+{% extends 'dentist/base.html' %}
+{% load static %}
+{% block title %}List of Consultation{%endblock%}
+
+{%block content%}
+
+
+<section class="dento-pricing-table-ar ea mt-50 section-padding-0-100">
+    <div class="container">
+    <div class="row">
+    <div class="col-12">
+    <div class="dento-price-table table-responsive">
+    <table class="table table-borderless mb-0">
+    <thead>
+    <tr>
+    <th scope="col">Patient Name</th>
+    <th scope="col">Diagnostics</th>
+    <th scope="col">Treatment</th>
+    <th scope="col">Date</th>
+    </tr>
+    </thead>
+    <tbody>
+
+        {% for consultation in object_list %}
+    <tr>
+    <ul>
+        
+        <li>
+    <th scope="row">{{ consultation.patient_name }}</th>
+    <td>{{ consultation.diagnostics }}</td>
+    <td>{{ consultation.treatment }}</td>
+    <td>{{ consultation.date }}</td>
+    <td><a href=""> view patient</a></td>
+    </li>
+    
+    </ul>
+    </tr>
+    {% endfor %}
+
+
+    </tbody>
+    </table>
+    </div>
+    </div>
+    <div class="col-12">
+    <div class="more-btn text-center mt-50">
+    <a href="#" class="btn dento-btn">Read More <i class="fa fa-angle-double-right"></i></a>
+    </div>
+    </div>
+    </div>
+    </div>
+    </section>
+
+ 
+
+    {%endblock%}
