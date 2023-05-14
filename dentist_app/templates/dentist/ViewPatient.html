@@ -41,6 +41,7 @@
             </div>
 
         </div>
+        <a href="{% url 'createconsultation' patient.user_id %}" class="btn btn-primary">Create Consultation</a>
 
     </div>
 
@@ -50,44 +51,30 @@
 
             
 <br><br>
-<a href="{% url 'createconsultation' patient.pk %}" class="btn btn-primary">Consultation</a>
 
-
-<section id="services" style="background-color:bisque">
-
-
-    <br><br>
-    
-    <div class="row">
-        <div class="col-md">
-            <div class="card card-body">
-                <table class="table table-sm">
-                    <tr>
-                        <th>Product</th>
-                        <th>Category</th>
-                        <th>Date Ordered</th>
-                        <th>Status</th>
-                        <th>Update</th>
-                        <th>Remove</th>
-                    </tr>
-                    {% for order in orders %}
-                    <tr>
-                        <td>{{ consultation.patient_name }}</td>
-                        <td>{{ consultation.diagnostics }}</td>
-                        <td>{{ consultation.treatment }}</td>
-                        <td>{{ consultation.date }}</td>
-                        <td><a href=""> Update</a></td>
-                        <td><a href=""> Delete</a></td>
-                    </tr>
-                    {% endfor %}
-    
-                </table>
-            </div>
-        </div>
-    </div>
-
+<section>
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Diagnostics</th>
+            <th scope="col">Treatment</th>
+            <th scope="col">Doctor Name</th>
+          </tr>
+         
+        </thead>
+        <tbody>
+            {% for consult in consultation %}
+          <tr>
+            <td>{{consult.date}}</td>
+            <td>{{consult.diagnostics}}</td>
+            <td>{{consult.treatment}}</td>
+            <td>{{consult.doctor_name.first_name}} {{consult.doctor_name.last_name}} </td>
+          </tr>
+          {% endfor %}   
+        </tbody>
+      </table>
 </section>
-
 
 
 

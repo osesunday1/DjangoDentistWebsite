@@ -59,22 +59,6 @@ class deleteappointment (DeleteView):
     #fields = '__all__'
     #fields = ('date', 'doctor_name', 'issue', 'time')
 
-
-
-class createConsultation (CreateView):
-    model = Consultation
-    form_class = ConsultationForm2
-    template_name = 'dentist/CreateConsultation.html'
-
-class viewconsultationlist (ListView):
-    model = Consultation
-    form_class = ConsultationForm
-    template_name = 'dentist/ViewConsultationList.html'
-
-class ConsultationDetailView(DetailView):
-    model = Patient
-    template_name = 'dentist/ViewPatient.html'
-
 '''
 def createConsultation(request, pk):
 
@@ -91,18 +75,9 @@ def createConsultation(request, pk):
     return render(request, 'dentist/CreateConsultation.html',context)
 
 
-
-
-
-def patient(request, pk_test):
-    patient= Patient.objects.get(id=pk_test)
-    #consultation= patient.consultation_set.all()
-
-    context = {'patient': patient}
-    return render(request, 'dentist/ViewPatient.html',context)
 '''
     
-
+'''
 class viewpatientlist (ListView):
     model = Patient
     form_class = PatientSignUpForm
@@ -110,17 +85,30 @@ class viewpatientlist (ListView):
     #fields = '__all__'
     #fields = ('title', 'body')
 
-'''
-def viewpatientlist(request):
-    patient= Patient.objects.all()
-    
-    context= {'patient':patient}
-    return render(request, 'dentist/ViewPatientList.html', context)
-'''
 
 class PatientDetailView(DetailView):
     model = Patient
     template_name = 'dentist/ViewPatient.html'
+'''
+
+def viewpatientlist(request):
+    patients= Patient.objects.all()
+    
+    context= {'patients':patients}
+    return render(request, 'dentist/ViewPatientList.html', context)
+
+
+
+def patientDetail(request, pk):
+    patient= Patient.objects.get(user_id=pk)
+    consultation= patient.consultation_set.all()
+    
+
+    context = {'patient': patient, 'consultation':consultation }
+    return render(request, 'dentist/ViewPatient.html',context)
+
+
+
 
 
 class viewdoctorlist (ListView):
@@ -135,8 +123,44 @@ class DoctorDetailView(DetailView):
     template_name = 'dentist/ViewDoctor.html'
 
 
+'''
+class createConsultation (CreateView):
+    model = Consultation
+    form_class = ConsultationForm2
+    template_name = 'dentist/CreateConsultation.html'
+
+class viewconsultationlist (ListView):
+    model = Consultation
+    form_class = ConsultationForm
+    template_name = 'dentist/ViewConsultationList.html'
+
+class ConsultationDetailView(DetailView):
+    model = Patient
+    template_name = 'dentist/ViewPatient.html'
+'''
 
 
+def viewconsultationlist(request):
+    consultations= Consultation.objects.all()
+    
+    context= {'consultations':consultations}
+    return render(request, 'dentist/ViewConsultationList.html', context)
+
+
+
+def createConsultation (request, pk):
+    patient = Patient.objects.get(user_id=pk)
+    form = ConsultationForm(initial={'patient_name':patient})
+    if request.method == 'POST': 
+        form = ConsultationForm(request.POST)
+        if form.is_valid(): # Have we been provided with a valid form?
+            form.save(commit=True) # Save the new information to the database.
+            return redirect('viewpatientlist') #reidrect to this web page
+        else:
+            print(form.errors)
+
+    context= {'form':form }
+    return render(request, 'dentist/CreateConsultation.html',context )
 
 
 
